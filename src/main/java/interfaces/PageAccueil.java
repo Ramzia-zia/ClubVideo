@@ -105,10 +105,10 @@ public class PageAccueil extends JFrame {
 
                 btnAjouterAbonne.addActionListener(ev -> gestionController.executerAjout("Abonne"));
                 btnModifierAbonne.addActionListener(ev -> gestionController.executerModification(panelGestion.getTableAbonne(), "Abonne"));
-                btnSupprimerAbonne.addActionListener(ev -> gestionController.executerSuppression(panelGestion.getTableAbonne()));
+                btnSupprimerAbonne.addActionListener(ev -> gestionController.executerSuppression(panelGestion.getTableAbonne(), "Abonne"));
                 btnAjouterCassette.addActionListener(ev -> gestionController.executerAjout("Cassette"));
                 btnModifierCassette.addActionListener(ev -> gestionController.executerModification(panelGestion.getTableCassette(), "Cassette"));
-                btnSupprimerCassette.addActionListener(ev -> gestionController.executerSuppression(panelGestion.getTableCassette()));
+                btnSupprimerCassette.addActionListener(ev -> gestionController.executerSuppression(panelGestion.getTableCassette(), "Cassette"));
 
                 panelBoutons.add(btnAjouterAbonne);
                 panelBoutons.add(btnModifierAbonne);

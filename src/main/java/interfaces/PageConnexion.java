@@ -1,68 +1,72 @@
 package interfaces;
 
-import database.Connexion;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.sql.*;
 
 public class PageConnexion extends JFrame {
 
     private JTextField txtUtilisateur;
     private JPasswordField txtMotDePasse;
-    private JButton btnConnecter;
 
     public PageConnexion() {
-        setTitle("Club Vidéo - Connexion");
-        setSize(400, 300);
+        setTitle("Club Video - Connexion");
+        setSize(400, 280);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
 
-        // Panel principal
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(30, 30, 60));
-        panel.setLayout(null);
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBackground(Color.WHITE);
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 40, 20, 40));
         add(panel);
 
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(8, 8, 8, 8);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
         // Titre
-        JLabel lblTitre = new JLabel(" Club Vidéo", SwingConstants.CENTER);
-        lblTitre.setFont(new Font("Arial", Font.BOLD, 24));
-        lblTitre.setForeground(Color.WHITE);
-        lblTitre.setBounds(0, 20, 400, 40);
-        panel.add(lblTitre);
+        JLabel lblTitre = new JLabel("CLUB VIDEO", SwingConstants.CENTER);
+        lblTitre.setFont(new Font("Arial", Font.BOLD, 22));
+        lblTitre.setForeground(new Color(50, 50, 50));
+        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        panel.add(lblTitre, gbc);
+
+        // Separateur
+        JSeparator sep = new JSeparator();
+        gbc.gridy = 1;
+        panel.add(sep, gbc);
 
         // Utilisateur
-        JLabel lblUser = new JLabel("Utilisateur :");
-        lblUser.setForeground(Color.WHITE);
-        lblUser.setBounds(60, 90, 120, 25);
-        panel.add(lblUser);
+        gbc.gridwidth = 1;
+        gbc.gridx = 0; gbc.gridy = 2;
+        panel.add(new JLabel("Utilisateur :"), gbc);
 
-        txtUtilisateur = new JTextField();
-        txtUtilisateur.setBounds(180, 90, 160, 25);
-        panel.add(txtUtilisateur);
+        gbc.gridx = 1;
+        txtUtilisateur = new JTextField(15);
+        panel.add(txtUtilisateur, gbc);
 
         // Mot de passe
-        JLabel lblPass = new JLabel("Mot de passe :");
-        lblPass.setForeground(Color.WHITE);
-        lblPass.setBounds(60, 135, 120, 25);
-        panel.add(lblPass);
+        gbc.gridx = 0; gbc.gridy = 3;
+        panel.add(new JLabel("Mot de passe :"), gbc);
 
-        txtMotDePasse = new JPasswordField();
-        txtMotDePasse.setBounds(180, 135, 160, 25);
-        panel.add(txtMotDePasse);
+        gbc.gridx = 1;
+        txtMotDePasse = new JPasswordField(15);
+        panel.add(txtMotDePasse, gbc);
 
         // Bouton
-        btnConnecter = new JButton("Se connecter");
-        btnConnecter.setBounds(130, 190, 140, 35);
-        btnConnecter.setBackground(new Color(0, 120, 215));
+        JButton btnConnecter = new JButton("Se connecter");
+        btnConnecter.setBackground(new Color(60, 60, 60));
         btnConnecter.setForeground(Color.WHITE);
         btnConnecter.setFont(new Font("Arial", Font.BOLD, 13));
+        btnConnecter.setFocusPainted(false);
         btnConnecter.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        panel.add(btnConnecter);
+        gbc.gridx = 0; gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        panel.add(btnConnecter, gbc);
 
-        // Action bouton
         btnConnecter.addActionListener(e -> seConnecter());
+        txtMotDePasse.addActionListener(e -> seConnecter());
 
         setVisible(true);
     }
@@ -71,18 +75,12 @@ public class PageConnexion extends JFrame {
         String user = txtUtilisateur.getText().trim();
         String pass = new String(txtMotDePasse.getPassword()).trim();
 
-        // Pour l'instant on vérifie simplement admin/admin
         if (user.equals("admin") && pass.equals("ramzia123")) {
-            JOptionPane.showMessageDialog(this, "Connexion réussie !");
-            new PageAccueil(); // on créera cette page après
+            new PageAccueil();
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Identifiants incorrects !",
                     "Erreur", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    public static void main(String[] args) {
-        new PageConnexion();
     }
 }

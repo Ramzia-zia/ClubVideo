@@ -13,7 +13,7 @@ public class DialogForm extends JDialog {
         setSize(300, 300);
 
         // Ajout des composants selon le titre
-        if(titre.contains("Abonné")) {
+        if(titre.toLowerCase().contains("abonne")) {
             add(new JLabel("Nom :")); add(txtNom);
             add(new JLabel("Adresse :")); add(txtAdresse);
         } else {
